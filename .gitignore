@@ -54,3 +54,6 @@ Thumbs.db
 coverage.txt
 coverage.out
 coverage.html
+
+# Flasgo 実行ファイル
+flasgo

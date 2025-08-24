@@ -13,6 +13,13 @@ install: build
 	sudo cp $(BINARY_NAME) $(INSTALL_PATH)/$(BINARY_NAME)
 	@echo "$(BINARY_NAME) が $(INSTALL_PATH) にインストールされました"
 
+# ローカルユーザーのbinディレクトリにインストール（sudo不要）
+install-user: build
+	mkdir -p ~/bin
+	cp $(BINARY_NAME) ~/bin/$(BINARY_NAME)
+	@echo "$(BINARY_NAME) が ~/bin にインストールされました"
+	@echo "PATH に ~/bin を追加してください: export PATH=\"\$$HOME/bin:\$$PATH\""
+
 # アンインストール
 uninstall:
 	sudo rm -f $(INSTALL_PATH)/$(BINARY_NAME)
