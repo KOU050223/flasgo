@@ -18,7 +18,12 @@ func main() {
 
 	switch args[0] {
 	case "create":
-		filemaker.Generator()
+		// プロジェクト名が指定されている場合は非対話モード
+		if len(args) > 1 {
+			filemaker.GenerateWithDefaults(args[1])
+		} else {
+			filemaker.Generator()
+		}
 	case "help":
 		help.Help()
 	default:

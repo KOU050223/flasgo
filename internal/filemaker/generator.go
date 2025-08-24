@@ -56,13 +56,34 @@ func collectProjectConfig() *types.ProjectConfig {
 	return config
 }
 
-// プロジェクト作成（現在は設定を表示するだけ）
-func createProject(config *types.ProjectConfig) error {
-	fmt.Printf("プロジェクト名: %s\n", config.Name)
-	fmt.Printf("タイプ: %s\n", config.Type)
-	fmt.Printf("構造: %s\n", config.Structure)
-	fmt.Printf("機能: %v\n", config.Features)
-	return nil
+// デフォルト設定でプロジェクト生成（非対話モード）
+func GenerateWithDefaults(projectName string) {
+	fmt.Printf("✨ Flaskプロジェクト '%s' をデフォルト設定で作成します\n\n", projectName)
+	
+	// デフォルト設定
+	config := &types.ProjectConfig{
+		Name:      projectName,
+		Type:      "webapp",  // デフォルトはWebアプリ
+		Structure: "standard", // デフォルトは標準構造
+		Features:  []string{"env"}, // デフォルトは環境変数管理のみ
+	}
+	
+	fmt.Printf("設定:\n")
+	fmt.Printf("  タイプ: %s (Webアプリ)\n", config.Type)
+	fmt.Printf("  構造: %s (標準構造)\n", config.Structure)
+	fmt.Printf("  機能: %v\n", config.Features)
+	
+	fmt.Printf("\n📁 プロジェクトを作成中...\n")
+	
+	// プロジェクト作成
+	err := createProject(config)
+	if err != nil {
+		fmt.Printf("❌ エラー: %v\n", err)
+		return
+	}
+	
+	fmt.Printf("✅ %s プロジェクトが作成されました！\n", config.Name)
+	printNextSteps(config)
 }
 
 // 次のステップを表示
